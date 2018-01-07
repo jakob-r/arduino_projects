@@ -50,6 +50,8 @@ void setup() {
 
   connectWifi();
   delay(1000);
+  getHue(3);
+  Serial.println(state_bri);
 }
 
 void connectWifi() {
@@ -70,8 +72,7 @@ void connectWifi() {
   Serial.println(WiFi.localIP());
 }
 
-String doHttp(String action, String &url, String command) {
-  String result;
+void doHttp(String action, String &url, String &command, String &result) {
   if ((WiFi.status() == WL_CONNECTED)) {
 
     HTTPClient http;
@@ -90,31 +91,32 @@ String doHttp(String action, String &url, String command) {
       // file found at server
       if (httpCode == HTTP_CODE_OK) {
         result = http.getString();
-        Serial.println(result.substring(0,63));
+        Serial.print(result.substring(0,63));
+        Serial.println("...");
       }
     } else {
       Serial.printf("[HTTP] %s... failed, error: %s\n", action.c_str(), http.errorToString(httpCode).c_str());
     }
     http.end();
   }
-  result;
 }
 
-void setHue(int lightNum, boolean on, int bri, int transitiontime) {
+void setHue(int lightNum, boolean ison, int bri, int transitiontime) {
   String url = String("http://") + HUE_IP + "/api/" + HUE_USER + "/lights/" + lightNum + "/state";
-  //String command = serializeHueJson(on, bri, transitiontime);
   String command;
-  if(on == true) {
-    command = "{\"on\": true, \"bri\": 200}";
-  } else {
-    command = "{\"on\": true, \"bri\": 100}";
-  }
-  doHttp("PUT", url, command);
+  serializeHueJson(ison, bri, transitiontime, command);
+  Serial.println(command);
+  String result = "Fuck this!";
+  doHttp("PUT", url, command, result);
+  Serial.println(url);
+  Serial.println(result);
 }
 
 void getHue(int lightNum) {
   String url = String("http://") + HUE_IP + "/api/" + HUE_USER + "/lights/" + lightNum;
-  String result = doHttp("PUT", url, String());
+  String result;
+  String command;
+  doHttp("GET", url, command, result);
   parseHueJson(result);
   state_light = lightNum; 
 }
@@ -123,8 +125,6 @@ void parseHueJson(String &json) {
   // Thanks to awesome service: http://arduinojson.org/assistant/
   const size_t bufferSize = JSON_OBJECT_SIZE(1) + 2*JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(7) + JSON_OBJECT_SIZE(11) + 440;
   DynamicJsonBuffer jsonBuffer(bufferSize);
-
-  //const char* json = "{\"state\":{\"on\":false,\"bri\":254,\"ct\":443,\"alert\":\"none\",\"colormode\":\"ct\",\"mode\":\"homeautomation\",\"reachable\":true},\"swupdate\":{\"state\":\"noupdates\",\"lastinstall\":\"2017-12-07T23:38:29\"},\"type\":\"Color temperature light\",\"name\":\"Küche 2\",\"modelid\":\"LTW013\",\"manufacturername\":\"Philips\",\"capabilities\":{\"streaming\":{\"renderer\":false,\"proxy\":false}},\"uniqueid\":\"00:17:88:01:03:51:58:97-0b\",\"swversion\":\"1.29.0_r21169\",\"swconfigid\":\"797DDD7C\",\"productid\":\"Philips-LTW013-1-GU10CTv1\"}";
 
   JsonObject& root = jsonBuffer.parseObject(json);
 
@@ -136,24 +136,22 @@ void parseHueJson(String &json) {
   state_reachable = state["reachable"]; // true
 }
 
-String serializeHueJson(boolean on, int bri, int transitiontime) {
+void serializeHueJson(boolean ison, int bri, int transitiontime, String &result) {
   // Thanks to awesome service: http://arduinojson.org/assistant/
-  String result;
   const size_t bufferSize = JSON_OBJECT_SIZE(3);
   DynamicJsonBuffer jsonBuffer(bufferSize);
 
   JsonObject& root = jsonBuffer.createObject();
-  if (on) {
-    root["on"] = on;  
-  }
-  if (transitiontime) {
+  //if (ison != NULL) {
+    root["on"] = (bool)ison;  
+  //}
+  //if (transitiontime != NULL) {
     root["transitiontime"] = transitiontime;  
-  }
-  if (bri) {
+  //}
+  //if (bri != NULL) {
     root["bri"] = bri;
-  }
+  //}
   root.printTo(result);
-  result;
 } 
 
 void loop() {
@@ -163,11 +161,11 @@ void loop() {
     Serial.print("Key pressed: ");
     Serial.println(customKey);
     int lamp = customKey - '0';
-    //getHue(lamp);
-    if (state_on) {
-      setHue(lamp, true, 110, NULL);
+    getHue(lamp);
+    if (state_on == true) {
+      setHue(lamp, false, 200, 2);
     } else {
-      setHue(lamp, false, 220, NULL);
+      setHue(lamp, true, 200, 2);
     }
     state_on = !state_on;
   }
