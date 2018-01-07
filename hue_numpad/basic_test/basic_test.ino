@@ -102,7 +102,13 @@ String doHttp(String action, String &url, String command) {
 
 void setHue(int lightNum, boolean on, int bri, int transitiontime) {
   String url = String("http://") + HUE_IP + "/api/" + HUE_USER + "/lights/" + lightNum + "/state";
-  String command = serializeHueJson(on, bri, transitiontime);
+  //String command = serializeHueJson(on, bri, transitiontime);
+  String command;
+  if(on == true) {
+    command = "{\"on\": true, \"bri\": 200}";
+  } else {
+    command = "{\"on\": true, \"bri\": 100}";
+  }
   doHttp("PUT", url, command);
 }
 
@@ -157,11 +163,12 @@ void loop() {
     Serial.print("Key pressed: ");
     Serial.println(customKey);
     int lamp = customKey - '0';
-    getHue(lamp);
+    //getHue(lamp);
     if (state_on) {
-      setHue(lamp, false, NULL, NULL);
+      setHue(lamp, true, 110, NULL);
     } else {
-      setHue(lamp, true, NULL, NULL);
+      setHue(lamp, false, 220, NULL);
     }
+    state_on = !state_on;
   }
 }
