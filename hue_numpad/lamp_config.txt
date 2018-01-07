@@ -1,0 +1,1352 @@
+ 
+{
+	"lights": {
+		"1": {
+			"state": {
+				"on": true,
+				"bri": 254,
+				"hue": 8402,
+				"sat": 140,
+				"effect": "none",
+				"xy": [
+					0.4575,
+					0.4099
+				],
+				"ct": 366,
+				"alert": "select",
+				"colormode": "xy",
+				"mode": "homeautomation",
+				"reachable": true
+			},
+			"swupdate": {
+				"state": "noupdates",
+				"lastinstall": "2017-11-14T15:57:50"
+			},
+			"type": "Extended color light",
+			"name": "Bett",
+			"modelid": "LCT010",
+			"manufacturername": "Philips",
+			"capabilities": {
+				"streaming": {
+					"renderer": true,
+					"proxy": true
+				}
+			},
+			"uniqueid": "00:17:88:01:02:77:2a:03-0b",
+			"swversion": "1.29.0_r21169",
+			"swconfigid": "6A139B19",
+			"productid": "Philips-LCT010-1-A19ECLv4"
+		},
+		"2": {
+			"state": {
+				"on": true,
+				"bri": 254,
+				"hue": 8402,
+				"sat": 140,
+				"effect": "none",
+				"xy": [
+					0.4575,
+					0.4099
+				],
+				"ct": 366,
+				"alert": "none",
+				"colormode": "xy",
+				"mode": "homeautomation",
+				"reachable": true
+			},
+			"swupdate": {
+				"state": "noupdates",
+				"lastinstall": "2017-11-14T15:57:52"
+			},
+			"type": "Extended color light",
+			"name": "Stern",
+			"modelid": "LCT010",
+			"manufacturername": "Philips",
+			"capabilities": {
+				"streaming": {
+					"renderer": true,
+					"proxy": true
+				}
+			},
+			"uniqueid": "00:17:88:01:02:77:30:08-0b",
+			"swversion": "1.29.0_r21169",
+			"swconfigid": "6A139B19",
+			"productid": "Philips-LCT010-1-A19ECLv4"
+		},
+		"3": {
+			"state": {
+				"on": true,
+				"bri": 254,
+				"hue": 8402,
+				"sat": 140,
+				"effect": "none",
+				"xy": [
+					0.4575,
+					0.4099
+				],
+				"ct": 366,
+				"alert": "none",
+				"colormode": "xy",
+				"mode": "homeautomation",
+				"reachable": true
+			},
+			"swupdate": {
+				"state": "noupdates",
+				"lastinstall": "2017-11-14T15:57:59"
+			},
+			"type": "Extended color light",
+			"name": "Stehlampe",
+			"modelid": "LCT010",
+			"manufacturername": "Philips",
+			"capabilities": {
+				"streaming": {
+					"renderer": true,
+					"proxy": true
+				}
+			},
+			"uniqueid": "00:17:88:01:02:75:bc:d4-0b",
+			"swversion": "1.29.0_r21169",
+			"swconfigid": "6A139B19",
+			"productid": "Philips-LCT010-1-A19ECLv4"
+		},
+		"4": {
+			"state": {
+				"on": false,
+				"bri": 254,
+				"ct": 366,
+				"alert": "none",
+				"colormode": "ct",
+				"mode": "homeautomation",
+				"reachable": true
+			},
+			"swupdate": {
+				"state": "noupdates",
+				"lastinstall": "2017-12-07T23:38:29"
+			},
+			"type": "Color temperature light",
+			"name": "Küche 2",
+			"modelid": "LTW013",
+			"manufacturername": "Philips",
+			"capabilities": {
+				"streaming": {
+					"renderer": false,
+					"proxy": false
+				}
+			},
+			"uniqueid": "00:17:88:01:03:51:58:97-0b",
+			"swversion": "1.29.0_r21169",
+			"swconfigid": "797DDD7C",
+			"productid": "Philips-LTW013-1-GU10CTv1"
+		},
+		"5": {
+			"state": {
+				"on": false,
+				"bri": 254,
+				"ct": 366,
+				"alert": "none",
+				"colormode": "ct",
+				"mode": "homeautomation",
+				"reachable": true
+			},
+			"swupdate": {
+				"state": "noupdates",
+				"lastinstall": "2017-12-07T23:38:18"
+			},
+			"type": "Color temperature light",
+			"name": "Küche 3",
+			"modelid": "LTW013",
+			"manufacturername": "Philips",
+			"capabilities": {
+				"streaming": {
+					"renderer": false,
+					"proxy": false
+				}
+			},
+			"uniqueid": "00:17:88:01:03:78:e4:46-0b",
+			"swversion": "1.29.0_r21169",
+			"swconfigid": "797DDD7C",
+			"productid": "Philips-LTW013-1-GU10CTv1"
+		},
+		"6": {
+			"state": {
+				"on": false,
+				"bri": 254,
+				"ct": 366,
+				"alert": "none",
+				"colormode": "ct",
+				"mode": "homeautomation",
+				"reachable": true
+			},
+			"swupdate": {
+				"state": "noupdates",
+				"lastinstall": "2017-12-07T23:38:23"
+			},
+			"type": "Color temperature light",
+			"name": "Küche 1",
+			"modelid": "LTW013",
+			"manufacturername": "Philips",
+			"capabilities": {
+				"streaming": {
+					"renderer": false,
+					"proxy": false
+				}
+			},
+			"uniqueid": "00:17:88:01:02:eb:e1:e5-0b",
+			"swversion": "1.29.0_r21169",
+			"swconfigid": "797DDD7C",
+			"productid": "Philips-LTW013-1-GU10CTv1"
+		},
+		"7": {
+			"state": {
+				"on": true,
+				"bri": 254,
+				"ct": 366,
+				"alert": "none",
+				"colormode": "ct",
+				"mode": "homeautomation",
+				"reachable": false
+			},
+			"swupdate": {
+				"state": "noupdates",
+				"lastinstall": "2017-12-07T23:38:13"
+			},
+			"type": "Color temperature light",
+			"name": "Arbeitsplatz",
+			"modelid": "LTW013",
+			"manufacturername": "Philips",
+			"capabilities": {
+				"streaming": {
+					"renderer": false,
+					"proxy": false
+				}
+			},
+			"uniqueid": "00:17:88:01:02:eb:dd:33-0b",
+			"swversion": "1.29.0_r21169",
+			"swconfigid": "797DDD7C",
+			"productid": "Philips-LTW013-1-GU10CTv1"
+		},
+		"8": {
+			"state": {
+				"on": true,
+				"bri": 254,
+				"ct": 366,
+				"alert": "none",
+				"colormode": "ct",
+				"mode": "homeautomation",
+				"reachable": false
+			},
+			"swupdate": {
+				"state": "noupdates",
+				"lastinstall": "2017-12-07T23:38:08"
+			},
+			"type": "Color temperature light",
+			"name": "Decke",
+			"modelid": "LTW013",
+			"manufacturername": "Philips",
+			"capabilities": {
+				"streaming": {
+					"renderer": false,
+					"proxy": false
+				}
+			},
+			"uniqueid": "00:17:88:01:02:eb:df:2d-0b",
+			"swversion": "1.29.0_r21169",
+			"swconfigid": "797DDD7C",
+			"productid": "Philips-LTW013-1-GU10CTv1"
+		},
+		"9": {
+			"state": {
+				"on": false,
+				"alert": "select",
+				"mode": "homeautomation",
+				"reachable": false
+			},
+			"swupdate": {
+				"state": "notupdatable",
+				"lastinstall": null
+			},
+			"type": "On/Off plug-in unit",
+			"name": "Weihnachtsbaum",
+			"modelid": "Plug 01",
+			"manufacturername": "OSRAM",
+			"capabilities": {
+				"streaming": {
+					"renderer": false,
+					"proxy": false
+				}
+			},
+			"uniqueid": "84:18:26:00:00:0d:6b:5e-03",
+			"swversion": "V1.04.12"
+		}
+	},
+	"groups": {
+		"2": {
+			"name": "Schlafzimmer",
+			"lights": [
+				"7",
+				"8",
+				"1"
+			],
+			"type": "Room",
+			"state": {
+				"all_on": true,
+				"any_on": true
+			},
+			"recycle": false,
+			"class": "Bedroom",
+			"action": {
+				"on": true,
+				"bri": 254,
+				"hue": 8402,
+				"sat": 140,
+				"effect": "none",
+				"xy": [
+					0.4575,
+					0.4099
+				],
+				"ct": 366,
+				"alert": "select",
+				"colormode": "xy"
+			}
+		},
+		"4": {
+			"name": "Wohnzimmer",
+			"lights": [
+				"2",
+				"3",
+				"4",
+				"5",
+				"6"
+			],
+			"type": "Room",
+			"state": {
+				"all_on": false,
+				"any_on": true
+			},
+			"recycle": false,
+			"class": "Living room",
+			"action": {
+				"on": false,
+				"bri": 254,
+				"hue": 8402,
+				"sat": 140,
+				"effect": "none",
+				"xy": [
+					0.4575,
+					0.4099
+				],
+				"ct": 366,
+				"alert": "none",
+				"colormode": "ct"
+			}
+		}
+	},
+	"config": {
+		"name": "Philips hue",
+		"zigbeechannel": 15,
+		"bridgeid": "001788FFFE461645",
+		"mac": "00:17:88:46:16:45",
+		"dhcp": false,
+		"ipaddress": "192.168.0.4",
+		"netmask": "255.255.255.0",
+		"gateway": "192.168.0.1",
+		"proxyaddress": "none",
+		"proxyport": 0,
+		"UTC": "2018-01-05T21:18:59",
+		"localtime": "2018-01-05T22:18:59",
+		"timezone": "Europe/Berlin",
+		"modelid": "BSB002",
+		"datastoreversion": "65",
+		"swversion": "1711151408",
+		"apiversion": "1.22.0",
+		"swupdate": {
+			"updatestate": 0,
+			"checkforupdate": false,
+			"devicetypes": {
+				"bridge": false,
+				"lights": [],
+				"sensors": []
+			},
+			"url": "",
+			"text": "",
+			"notify": true
+		},
+		"swupdate2": {
+			"checkforupdate": false,
+			"lastchange": "2017-12-29T12:19:12",
+			"bridge": {
+				"state": "noupdates",
+				"lastinstall": "2017-12-02T15:25:18"
+			},
+			"state": "noupdates",
+			"autoinstall": {
+				"updatetime": "T14:00:00",
+				"on": false
+			}
+		},
+		"linkbutton": false,
+		"portalservices": true,
+		"portalconnection": "connected",
+		"portalstate": {
+			"signedon": true,
+			"incoming": false,
+			"outgoing": true,
+			"communication": "disconnected"
+		},
+		"internetservices": {
+			"internet": "connected",
+			"remoteaccess": "connected",
+			"time": "connected",
+			"swupdate": "connected"
+		},
+		"factorynew": false,
+		"replacesbridgeid": null,
+		"backup": {
+			"status": "idle",
+			"errorcode": 0
+		},
+		"starterkitid": "",
+		"whitelist": {
+			"3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1": {
+				"last use date": "2018-01-05T21:10:25",
+				"create date": "2017-02-17T17:57:33",
+				"name": "Hue 2#Xiaomi Redmi 3S"
+			},
+			"JvWZvsiWM0huMdDJzI4hHu5vbyfb6cTa4A46TKkE": {
+				"last use date": "2017-02-17T18:44:55",
+				"create date": "2017-02-17T18:39:06",
+				"name": "Echo"
+			},
+			"2Zot7vxNapF-6FVTGN9GC-AKOn04jiHgmCADcB9r": {
+				"last use date": "2017-02-17T18:44:55",
+				"create date": "2017-02-17T18:39:07",
+				"name": "Echo"
+			},
+			"JGZCx2LZb2HX4vimyuoJ9IkQagIK6STOs2EfFFS4": {
+				"last use date": "2018-01-05T20:40:25",
+				"create date": "2017-02-17T18:39:07",
+				"name": "hue-alexa-smarthome-skill-v1"
+			},
+			"tCNYNkz3DaZ72cKx1f8UHwOnKF2RkeFfnGfjF9Hh": {
+				"last use date": "2018-01-05T17:25:25",
+				"create date": "2017-02-17T18:39:07",
+				"name": "Echo"
+			},
+			"SzdW-fyySxncA0OBSJDFcVgDaMx5xRoeAcAWQ05Y": {
+				"last use date": "2018-01-05T21:10:25",
+				"create date": "2017-02-17T23:58:34",
+				"name": "Hue 2#HUAWEI FRD-L09"
+			},
+			"doruL6Q5hpX0LpxlkpLNuTsEPFHroORDuNyYEE50": {
+				"last use date": "2018-01-05T15:55:25",
+				"create date": "2017-02-25T01:14:56",
+				"name": "iftttv2"
+			},
+			"yTyHpTltrvTpIk85qMV8KtpmX-Qf4uX6x4JnODXj": {
+				"last use date": "2018-01-01T01:25:24",
+				"create date": "2017-02-25T02:12:16",
+				"name": "Huemanic#Redmi 3S"
+			},
+			"4RntEdDol9Cy7PBf0Hkk-5NZ17V5otYqf9rr5bVh": {
+				"last use date": "2017-02-25T12:44:55",
+				"create date": "2017-02-25T12:31:20",
+				"name": "kodi#ambilight"
+			},
+			"mVHBZKGfaqcUrEvWBRcH9epEm0f7mcvyE1Fiv-Yu": {
+				"last use date": "2017-04-12T18:22:27",
+				"create date": "2017-02-25T12:37:02",
+				"name": "kodi#ambilight"
+			},
+			"rbfdw8vJB5xfCGMJoNBWpAsJ0xNdQR150jMhLNqg": {
+				"last use date": "2017-02-27T00:59:56",
+				"create date": "2017-02-27T00:37:33",
+				"name": "autohue#android"
+			},
+			"DIjFiE6SH-Qa7vhagvtu5DwKUtEO6W9QztqKKDcF": {
+				"last use date": "2017-05-21T19:42:52",
+				"create date": "2017-03-01T17:28:49",
+				"name": "lampe-1.1.8#jakob"
+			},
+			"fFNkeCHkeWr-w9eO-s68qLSwgoKaMHZRI85ksI6z": {
+				"last use date": "2018-01-05T21:18:59",
+				"create date": "2018-01-05T21:08:39",
+				"name": "my_arduino#main"
+			}
+		}
+	},
+	"schedules": {
+		"1": {
+			"name": "nachtaus",
+			"description": "L_07_URIYI_01",
+			"command": {
+				"address": "/api/3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1/groups/0/action",
+				"body": {
+					"scene": "fQKkjeiEKNL9l-Z"
+				},
+				"method": "PUT"
+			},
+			"localtime": "2017-12-08T02:00:00",
+			"time": "2017-12-08T01:00:00",
+			"created": "2017-12-08T00:34:16",
+			"status": "disabled",
+			"autodelete": false,
+			"recycle": false
+		},
+		"2": {
+			"name": "Go to sleep start",
+			"description": "Trigger go to sleep start",
+			"command": {
+				"address": "/api/3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1/sensors/2/state",
+				"body": {
+					"flag": true
+				},
+				"method": "PUT"
+			},
+			"localtime": "W121/T23:15:00",
+			"time": "W121/T22:15:00",
+			"created": "2017-02-25T01:43:03",
+			"status": "enabled",
+			"recycle": true
+		},
+		"3": {
+			"name": "Go to sleep start",
+			"description": "Trigger go to sleep start",
+			"command": {
+				"address": "/api/3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1/sensors/3/state",
+				"body": {
+					"flag": true
+				},
+				"method": "PUT"
+			},
+			"localtime": "W006/T23:55:00",
+			"time": "W006/T22:55:00",
+			"created": "2017-02-25T01:42:47",
+			"status": "enabled",
+			"recycle": true
+		},
+		"4": {
+			"name": "Natürlich Aufwachen 1",
+			"description": "L_04_ztMmS_start wake up",
+			"command": {
+				"address": "/api/3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1/sensors/7/state",
+				"body": {
+					"flag": true
+				},
+				"method": "PUT"
+			},
+			"localtime": "W124/T08:00:00",
+			"time": "W124/T07:00:00",
+			"created": "2017-12-08T00:33:24",
+			"status": "enabled",
+			"recycle": true
+		},
+		"5": {
+			"name": "L_04_ztMmS",
+			"description": "L_04_ztMmS_trigger end scene",
+			"command": {
+				"address": "/api/3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1/groups/0/action",
+				"body": {
+					"scene": "aIeGh11NMz1lRVf"
+				},
+				"method": "PUT"
+			},
+			"localtime": "PT00:01:00",
+			"time": "PT00:01:00",
+			"created": "2017-12-08T00:33:24",
+			"status": "disabled",
+			"autodelete": false,
+			"starttime": "2018-01-05T07:00:00",
+			"recycle": true
+		},
+		"8": {
+			"name": "tagaus",
+			"description": "L_07_Hd6cE_01",
+			"command": {
+				"address": "/api/3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1/groups/0/action",
+				"body": {
+					"scene": "jY9-3dbjxHpxsCK"
+				},
+				"method": "PUT"
+			},
+			"localtime": "W124/T09:30:00",
+			"time": "W124/T08:30:00",
+			"created": "2017-03-18T04:56:39",
+			"status": "enabled",
+			"recycle": false
+		}
+	},
+	"scenes": {
+		"nvGQz28Zta6tniA": {
+			"name": "Schöner Abend",
+			"lights": [
+				"2",
+				"3",
+				"4",
+				"5",
+				"6"
+			],
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": false,
+			"locked": false,
+			"appdata": {
+				"version": 1,
+				"data": "67oiw_r04_d99"
+			},
+			"picture": "",
+			"lastupdated": "2017-12-07T23:45:42",
+			"version": 2
+		},
+		"17WGoqfb6Buy-5C": {
+			"name": "Hell",
+			"lights": [
+				"2",
+				"3",
+				"4",
+				"5",
+				"6"
+			],
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": true,
+			"locked": false,
+			"appdata": {
+				"version": 1,
+				"data": "enCXG_r04_d05"
+			},
+			"picture": "",
+			"lastupdated": "2017-12-07T23:47:59",
+			"version": 2
+		},
+		"nhoMZl6KH1geMrn": {
+			"name": "Wake Up init",
+			"lights": [
+				"8"
+			],
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": true,
+			"locked": true,
+			"appdata": {},
+			"picture": "",
+			"lastupdated": "2017-12-08T00:33:24",
+			"version": 2
+		},
+		"aIeGh11NMz1lRVf": {
+			"name": "Wake Up end",
+			"lights": [
+				"8"
+			],
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": true,
+			"locked": true,
+			"appdata": {},
+			"picture": "",
+			"lastupdated": "2017-12-08T00:33:24",
+			"version": 2
+		},
+		"q9Cza8Kx0oUIYE6": {
+			"name": "Morgens",
+			"lights": [
+				"2",
+				"3",
+				"4",
+				"5",
+				"6"
+			],
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": false,
+			"locked": false,
+			"appdata": {
+				"version": 1,
+				"data": "Dz7fL_r04_d99"
+			},
+			"picture": "",
+			"lastupdated": "2017-12-12T07:45:02",
+			"version": 2
+		},
+		"VM8rRJZTmhnWOeS": {
+			"name": "Aus",
+			"lights": [
+				"1",
+				"2",
+				"3",
+				"4",
+				"5",
+				"6",
+				"7",
+				"8",
+				"9"
+			],
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": true,
+			"locked": false,
+			"appdata": {
+				"version": 1,
+				"data": "a4Bya_r00_d19"
+			},
+			"picture": "",
+			"lastupdated": "2017-12-29T12:20:02",
+			"version": 2
+		},
+		"tRbANyAjkqHFgJN": {
+			"name": "Letzter \"Ein\" Zustand",
+			"lights": [
+				"1",
+				"7",
+				"8"
+			],
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": true,
+			"locked": false,
+			"appdata": {
+				"version": 1,
+				"data": "nM1Yg_r02_d20"
+			},
+			"picture": "",
+			"lastupdated": "2017-12-07T18:11:31",
+			"version": 2
+		},
+		"okZddnXfIndRWXc": {
+			"name": "Go to sleep start",
+			"lights": [
+				"1",
+				"2",
+				"3",
+				"4",
+				"5",
+				"6",
+				"7",
+				"8"
+			],
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": true,
+			"locked": true,
+			"appdata": {},
+			"picture": "",
+			"lastupdated": "2017-12-07T18:11:17",
+			"version": 2
+		},
+		"kivPXm1PqwkRG1B": {
+			"name": "Go to sleep end",
+			"lights": [
+				"1",
+				"2",
+				"3",
+				"4",
+				"5",
+				"6",
+				"7",
+				"8"
+			],
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": true,
+			"locked": true,
+			"appdata": {},
+			"picture": "",
+			"lastupdated": "2017-12-07T18:11:18",
+			"version": 2
+		},
+		"Mgf01LRsOQQRW3Y": {
+			"name": "Go to sleep start",
+			"lights": [
+				"1",
+				"2",
+				"3",
+				"4",
+				"5",
+				"6",
+				"7",
+				"8"
+			],
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": true,
+			"locked": true,
+			"appdata": {},
+			"picture": "",
+			"lastupdated": "2017-12-07T18:11:16",
+			"version": 2
+		},
+		"VkNvoIhnrZOCOmN": {
+			"name": "Go to sleep end",
+			"lights": [
+				"1",
+				"2",
+				"3",
+				"4",
+				"5",
+				"6",
+				"7",
+				"8"
+			],
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": true,
+			"locked": true,
+			"appdata": {},
+			"picture": "",
+			"lastupdated": "2017-12-07T18:11:17",
+			"version": 2
+		},
+		"LPxhP0jEfFC5n5E": {
+			"name": "Wake Up init",
+			"lights": [
+				"1"
+			],
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": true,
+			"locked": true,
+			"appdata": {},
+			"picture": "",
+			"lastupdated": "2017-02-26T08:33:11",
+			"version": 2
+		},
+		"hajQu9dM05v0D8h": {
+			"name": "Wake Up end",
+			"lights": [
+				"1"
+			],
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": true,
+			"locked": false,
+			"appdata": {},
+			"picture": "",
+			"lastupdated": "2017-02-26T08:33:11",
+			"version": 2
+		},
+		"fQKkjeiEKNL9l-Z": {
+			"name": "Aus",
+			"lights": [
+				"1",
+				"2",
+				"3",
+				"4",
+				"5",
+				"6",
+				"7",
+				"8",
+				"9"
+			],
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": true,
+			"locked": true,
+			"appdata": {
+				"version": 1,
+				"data": "a4Bya_r00_d19"
+			},
+			"picture": "",
+			"lastupdated": "2017-12-29T12:20:04",
+			"version": 2
+		},
+		"jY9-3dbjxHpxsCK": {
+			"name": "Hell",
+			"lights": [
+				"1",
+				"2",
+				"3",
+				"4",
+				"5",
+				"6",
+				"7",
+				"8",
+				"9"
+			],
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": true,
+			"locked": true,
+			"appdata": {
+				"version": 1,
+				"data": "cVlo8_r00_d05"
+			},
+			"picture": "",
+			"lastupdated": "2017-12-29T12:20:00",
+			"version": 2
+		},
+		"4Ml1G3OOB64atTk": {
+			"name": "Wake Up init",
+			"lights": [
+				"1"
+			],
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": true,
+			"locked": true,
+			"appdata": {},
+			"picture": "",
+			"lastupdated": "2017-02-26T08:32:41",
+			"version": 2
+		},
+		"sWbsX7du1C7gH73": {
+			"name": "Wake Up end",
+			"lights": [
+				"1"
+			],
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": true,
+			"locked": false,
+			"appdata": {},
+			"picture": "",
+			"lastupdated": "2017-02-26T08:32:41",
+			"version": 2
+		},
+		"fYCbGMRl7RSTzvC": {
+			"name": "Abend",
+			"lights": [
+				"1",
+				"7",
+				"8"
+			],
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": false,
+			"locked": false,
+			"appdata": {
+				"version": 1,
+				"data": "Ezy3c_r02_d99"
+			},
+			"picture": "",
+			"lastupdated": "2017-12-07T23:42:37",
+			"version": 2
+		}
+	},
+	"rules": {
+		"1": {
+			"name": "Go to sleep start",
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"created": "2017-02-25T01:42:03",
+			"lasttriggered": "2018-01-04T22:15:00",
+			"timestriggered": 25,
+			"status": "enabled",
+			"recycle": true,
+			"conditions": [
+				{
+					"address": "/sensors/2/state/flag",
+					"operator": "eq",
+					"value": "true"
+				}
+			],
+			"actions": [
+				{
+					"address": "/groups/0/action",
+					"method": "PUT",
+					"body": {
+						"scene": "okZddnXfIndRWXc"
+					}
+				}
+			]
+		},
+		"2": {
+			"name": "Go to sleep fade",
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"created": "2017-02-25T01:42:03",
+			"lasttriggered": "2018-01-04T22:16:00",
+			"timestriggered": 25,
+			"status": "enabled",
+			"recycle": true,
+			"conditions": [
+				{
+					"address": "/sensors/2/state/flag",
+					"operator": "eq",
+					"value": "true"
+				},
+				{
+					"address": "/sensors/2/state/flag",
+					"operator": "ddx",
+					"value": "PT00:01:00"
+				}
+			],
+			"actions": [
+				{
+					"address": "/groups/0/action",
+					"method": "PUT",
+					"body": {
+						"scene": "kivPXm1PqwkRG1B"
+					}
+				},
+				{
+					"address": "/sensors/2/state",
+					"method": "PUT",
+					"body": {
+						"flag": false
+					}
+				}
+			]
+		},
+		"3": {
+			"name": "Go to sleep start",
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"created": "2017-02-25T01:42:47",
+			"lasttriggered": "2017-12-30T22:55:00",
+			"timestriggered": 9,
+			"status": "enabled",
+			"recycle": true,
+			"conditions": [
+				{
+					"address": "/sensors/3/state/flag",
+					"operator": "eq",
+					"value": "true"
+				}
+			],
+			"actions": [
+				{
+					"address": "/groups/0/action",
+					"method": "PUT",
+					"body": {
+						"scene": "Mgf01LRsOQQRW3Y"
+					}
+				}
+			]
+		},
+		"4": {
+			"name": "Go to sleep fade",
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"created": "2017-02-25T01:42:47",
+			"lasttriggered": "2017-12-30T22:56:00",
+			"timestriggered": 9,
+			"status": "enabled",
+			"recycle": true,
+			"conditions": [
+				{
+					"address": "/sensors/3/state/flag",
+					"operator": "eq",
+					"value": "true"
+				},
+				{
+					"address": "/sensors/3/state/flag",
+					"operator": "ddx",
+					"value": "PT00:01:00"
+				}
+			],
+			"actions": [
+				{
+					"address": "/groups/0/action",
+					"method": "PUT",
+					"body": {
+						"scene": "VkNvoIhnrZOCOmN"
+					}
+				},
+				{
+					"address": "/sensors/3/state",
+					"method": "PUT",
+					"body": {
+						"flag": false
+					}
+				}
+			]
+		},
+		"5": {
+			"name": "L_04_TPJ2E_Start",
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"created": "2017-02-26T08:33:11",
+			"lasttriggered": "none",
+			"timestriggered": 0,
+			"status": "enabled",
+			"recycle": false,
+			"conditions": [
+				{
+					"address": "/sensors/4/state/flag",
+					"operator": "eq",
+					"value": "true"
+				}
+			],
+			"actions": [
+				{
+					"address": "/groups/2/action",
+					"method": "PUT",
+					"body": {
+						"scene": "LPxhP0jEfFC5n5E"
+					}
+				},
+				{
+					"address": "/schedules/5",
+					"method": "PUT",
+					"body": {
+						"status": "enabled"
+					}
+				},
+				{
+					"address": "/sensors/4/state",
+					"method": "PUT",
+					"body": {
+						"flag": false
+					}
+				}
+			]
+		},
+		"6": {
+			"name": "L_01_dPPgz_Leave",
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"created": "2017-03-09T13:33:56",
+			"lasttriggered": "none",
+			"timestriggered": 0,
+			"status": "enabled",
+			"recycle": false,
+			"conditions": [
+				{
+					"address": "/sensors/6/state/presence",
+					"operator": "eq",
+					"value": "false"
+				},
+				{
+					"address": "/sensors/6/state/lastupdated",
+					"operator": "dx"
+				}
+			],
+			"actions": [
+				{
+					"address": "/groups/0/action",
+					"method": "PUT",
+					"body": {
+						"on": false
+					}
+				}
+			]
+		},
+		"7": {
+			"name": "L_04_GShMi_Start",
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"created": "2017-02-26T08:32:41",
+			"lasttriggered": "none",
+			"timestriggered": 0,
+			"status": "enabled",
+			"recycle": false,
+			"conditions": [
+				{
+					"address": "/sensors/5/state/flag",
+					"operator": "eq",
+					"value": "true"
+				}
+			],
+			"actions": [
+				{
+					"address": "/groups/2/action",
+					"method": "PUT",
+					"body": {
+						"scene": "4Ml1G3OOB64atTk"
+					}
+				},
+				{
+					"address": "/schedules/7",
+					"method": "PUT",
+					"body": {
+						"status": "enabled"
+					}
+				},
+				{
+					"address": "/sensors/5/state",
+					"method": "PUT",
+					"body": {
+						"flag": false
+					}
+				}
+			]
+		},
+		"8": {
+			"name": "L_04_ztMmS_Start",
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"created": "2017-12-08T00:33:24",
+			"lasttriggered": "2018-01-05T07:00:00",
+			"timestriggered": 21,
+			"status": "enabled",
+			"recycle": true,
+			"conditions": [
+				{
+					"address": "/sensors/7/state/flag",
+					"operator": "eq",
+					"value": "true"
+				}
+			],
+			"actions": [
+				{
+					"address": "/groups/2/action",
+					"method": "PUT",
+					"body": {
+						"scene": "nhoMZl6KH1geMrn"
+					}
+				},
+				{
+					"address": "/schedules/5",
+					"method": "PUT",
+					"body": {
+						"status": "enabled"
+					}
+				},
+				{
+					"address": "/sensors/7/state",
+					"method": "PUT",
+					"body": {
+						"flag": false
+					}
+				}
+			]
+		}
+	},
+	"sensors": {
+		"1": {
+			"state": {
+				"daylight": false,
+				"lastupdated": "2018-01-05T15:06:00"
+			},
+			"config": {
+				"on": true,
+				"configured": true,
+				"sunriseoffset": 30,
+				"sunsetoffset": -30
+			},
+			"name": "Daylight",
+			"type": "Daylight",
+			"modelid": "PHDL00",
+			"manufacturername": "Philips",
+			"swversion": "1.0"
+		},
+		"2": {
+			"state": {
+				"flag": false,
+				"lastupdated": "2018-01-04T22:16:00"
+			},
+			"config": {
+				"on": true,
+				"reachable": true
+			},
+			"name": "Go to sleep",
+			"type": "CLIPGenericFlag",
+			"modelid": "GOTOSLEEP",
+			"manufacturername": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qy",
+			"swversion": "A_01036659",
+			"uniqueid": "L_05_ijWZe",
+			"recycle": true
+		},
+		"3": {
+			"state": {
+				"flag": false,
+				"lastupdated": "2017-12-30T22:56:00"
+			},
+			"config": {
+				"on": true,
+				"reachable": true
+			},
+			"name": "Go to sleep",
+			"type": "CLIPGenericFlag",
+			"modelid": "GOTOSLEEP",
+			"manufacturername": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qy",
+			"swversion": "A_01036659",
+			"uniqueid": "L_05_DAYC1",
+			"recycle": true
+		},
+		"4": {
+			"state": {
+				"flag": false,
+				"lastupdated": "none"
+			},
+			"config": {
+				"on": true,
+				"reachable": true
+			},
+			"name": "Aufwachen 1",
+			"type": "CLIPGenericFlag",
+			"modelid": "WAKEUP",
+			"manufacturername": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qy",
+			"swversion": "A_01036659",
+			"uniqueid": "L_04_TPJ2E",
+			"recycle": false
+		},
+		"5": {
+			"state": {
+				"flag": false,
+				"lastupdated": "none"
+			},
+			"config": {
+				"on": true,
+				"reachable": true
+			},
+			"name": "Aufwachen we",
+			"type": "CLIPGenericFlag",
+			"modelid": "WAKEUP",
+			"manufacturername": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qy",
+			"swversion": "A_01036659",
+			"uniqueid": "L_04_GShMi",
+			"recycle": false
+		},
+		"6": {
+			"state": {
+				"presence": false,
+				"lastupdated": "none"
+			},
+			"config": {
+				"on": true,
+				"reachable": true
+			},
+			"name": "HomeAway",
+			"type": "CLIPPresence",
+			"modelid": "HOMEAWAY",
+			"manufacturername": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qy",
+			"swversion": "A_1",
+			"uniqueid": "L_01_dPPgz",
+			"recycle": false
+		},
+		"7": {
+			"state": {
+				"flag": false,
+				"lastupdated": "2018-01-05T07:00:00"
+			},
+			"config": {
+				"on": true,
+				"reachable": true
+			},
+			"name": "Sensor for wakeup",
+			"type": "CLIPGenericFlag",
+			"modelid": "WAKEUP",
+			"manufacturername": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qy",
+			"swversion": "A_1711151408",
+			"uniqueid": "L_04_ztMmS",
+			"recycle": true
+		}
+	},
+	"resourcelinks": {
+		"15976": {
+			"name": "we sleep",
+			"description": "Go to sleep behaviour",
+			"type": "Link",
+			"classid": 20010,
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": false,
+			"links": [
+				"/sensors/3",
+				"/schedules/3",
+				"/rules/3",
+				"/rules/4",
+				"/scenes/Mgf01LRsOQQRW3Y",
+				"/scenes/VkNvoIhnrZOCOmN",
+				"/groups/0"
+			]
+		},
+		"28892": {
+			"name": "Wake up 4",
+			"description": "Wake up 4 behavior",
+			"type": "Link",
+			"classid": 20101,
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": false,
+			"links": [
+				"/sensors/7",
+				"/schedules/4",
+				"/schedules/5",
+				"/groups/2",
+				"/rules/8",
+				"/scenes/nhoMZl6KH1geMrn",
+				"/scenes/aIeGh11NMz1lRVf"
+			]
+		},
+		"61957": {
+			"name": "week sleep",
+			"description": "Go to sleep behaviour",
+			"type": "Link",
+			"classid": 20010,
+			"owner": "3OT-BoCDpvfPecw5eVwRuoCvVDQ6l2qyj0TsFbn1",
+			"recycle": false,
+			"links": [
+				"/sensors/2",
+				"/schedules/2",
+				"/rules/1",
+				"/rules/2",
+				"/scenes/okZddnXfIndRWXc",
+				"/scenes/kivPXm1PqwkRG1B",
+				"/groups/0"
+			]
+		}
+	}
+}

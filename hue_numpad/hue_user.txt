@@ -1,0 +1,11 @@
+post:
+{"devicetype": "my_arduino#main"}
+
+recieve:
+[
+	{
+		"success": {
+			"username": "fFNkeCHkeWr-w9eO-s68qLSwgoKaMHZRI85ksI6z"
+		}
+	}
+]
