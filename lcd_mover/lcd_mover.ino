@@ -9,21 +9,19 @@ LedControl lc=LedControl(4,2,3,1);
 // Nano: A4 SDA, A5 SCL
 #include<Wire.h> 
 const int MPU_addr=0x68;  // I2C-Adresse des MPU-6050
-int16_t AcX,AcY,AcZ,Tmp,GyX,GyY,GyZ;
+int16_t AcY,AcZ,AcX; //left out: ,AcX,Tmp,GyX,GyY,GyZ;
 
 // for the game
-const int delaytime = 25;
-// include queue library header.
-#include <QueueArray.h>
-QueueArray <int> queueX;
-QueueArray <int> queueY;
-const int queueN = 5;
-int queueNnow = 0;
+const int delaytime = 100;
+boolean gameOver = false;
 
 void setup() {
   Serial.begin(9600);
   setupDisplay();
   setupMpu();
+  snakeStart(4,2,5);
+  writeDisplay();
+  delay(delaytime);
 }
 
 void setupDisplay() {
@@ -54,58 +52,98 @@ void readMpu() {
   AcX=Wire.read()<<8|Wire.read();  // 0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)    
   AcY=Wire.read()<<8|Wire.read();  // 0x3D (ACCEL_YOUT_H) & 0x3E (ACCEL_YOUT_L)
   AcZ=Wire.read()<<8|Wire.read();  // 0x3F (ACCEL_ZOUT_H) & 0x40 (ACCEL_ZOUT_L)
-  Tmp=Wire.read()<<8|Wire.read();  // 0x41 (TEMP_OUT_H) & 0x42 (TEMP_OUT_L)
-  GyX=Wire.read()<<8|Wire.read();  // 0x43 (GYRO_XOUT_H) & 0x44 (GYRO_XOUT_L)
-  GyY=Wire.read()<<8|Wire.read();  // 0x45 (GYRO_YOUT_H) & 0x46 (GYRO_YOUT_L)
-  GyZ=Wire.read()<<8|Wire.read();  // 0x47 (GYRO_ZOUT_H) & 0x48 (GYRO_ZOUT_L)
+  //Tmp=Wire.read()<<8|Wire.read();  // 0x41 (TEMP_OUT_H) & 0x42 (TEMP_OUT_L)
+  //GyX=Wire.read()<<8|Wire.read();  // 0x43 (GYRO_XOUT_H) & 0x44 (GYRO_XOUT_L)
+  //GyY=Wire.read()<<8|Wire.read();  // 0x45 (GYRO_YOUT_H) & 0x46 (GYRO_YOUT_L)
+  //GyZ=Wire.read()<<8|Wire.read();  // 0x47 (GYRO_ZOUT_H) & 0x48 (GYRO_ZOUT_L)
 }
-/* 
- This function will light up every Led on the matrix.
- The led will blink along with the row-number.
- row number 4 (index==3) will blink 4 times etc.
- */
-void single() {
-  for(int row=0;row<8;row++) {
-    for(int col=0;col<8;col++) {
-      delay(delaytime);
-      lc.setLed(0,row,col,true);
-      delay(delaytime);
-      for(int i=0;i<col;i++) {
-        lc.setLed(0,row,col,false);
-        delay(delaytime);
-        lc.setLed(0,row,col,true);
-        delay(delaytime);
-      }
-    }
-  }
+
+float mapf(int16_t x, int in_min, int in_max, int out_min, int out_max)
+{
+ return (float)(x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
 void loop() {
   readMpu();
 //  Serial.print("AcX = "); Serial.print(AcX);
 //  Serial.print(" | AcY = "); Serial.print(AcY);
-//  Serial.print(" | AcZ = "); Serial.print(AcZ);
+//  Serial.print(" | AcZ = "); Serial.println(AcZ);
 //  Serial.print(" | Tmp = "); Serial.print(Tmp/340.00+36.53);  //Gleichung für Temperatur in Grad C aus Datenblatt
 //  Serial.print(" | GyY = "); Serial.print(GyY);
 //  Serial.print(" | GyZ = "); Serial.println(GyZ);
-  byte static x;
-  byte static y;
-  byte y_new = map(AcZ, 5000, -5000, 0, 7);
-  byte x_new = map(AcY, 5000, -5000, 0, 7);
-  if (x_new != x || y_new != y) {
-    x = x_new;
-    y = y_new;
-    lc.setLed(0,x,y,true);
-    queueX.push(x);
-    queueY.push(y);
-    if (queueNnow < queueN) {
-      queueNnow++;
-    } else {
-      x_new = queueX.pop();
-      y_new = queueY.pop();
-      lc.setLed(0,x_new,y_new,false);
-    }  
+  static float x;
+  static float y;
+//  AcZ = random(-10000,10000);
+//  AcY = random(-10000,10000);
+  y = mapf(AcZ, 8000, -8000, 1, 8);
+  x = mapf(AcY, 8000, -8000, 1, 8);
+
+  if(!gameOver){
+    gameOver = !moveSnakeTo(x, y);
+    writeDisplay();
+    delay(delaytime);
   }
+    
+//  Serial.println("Left");
+//  moveSnakeTo(2, 3);
+//  writeDisplay();
+//  delay(delaytime);
+//  moveSnakeTo(1, 3);
+//  writeDisplay();
+//  delay(delaytime);
+//  moveSnakeTo(0, 3);
+//  writeDisplay();
+//  delay(delaytime);
+//  moveSnakeTo(-1, 3);
+//  writeDisplay();
+//  delay(delaytime);
+//  moveSnakeTo(-2, 3);
+//  writeDisplay();
+//  delay(delaytime);
+//  Serial.println("Up");
+//  moveSnakeTo(-2, 4);
+//  writeDisplay();
+//  delay(delaytime);
+//  moveSnakeTo(-2, 5);
+//  writeDisplay();
+//  delay(delaytime);
+//  moveSnakeTo(-2, 6);
+//  writeDisplay();
+//  delay(delaytime);
+//  moveSnakeTo(-2, 7);
+//  writeDisplay();
+//  delay(delaytime);
+//  moveSnakeTo(-2, 8);
+//  writeDisplay();
+//  delay(delaytime);
+//  moveSnakeTo(-2, 9);
+//  writeDisplay();
+//  delay(delaytime);
+//  moveSnakeTo(-2, 10);
+//  writeDisplay();
+//  delay(delaytime);
+//  Serial.println("Right");
+//  moveSnakeTo(-1, 10);
+//  writeDisplay();
+//  delay(delaytime);
+//  moveSnakeTo(0, 10);
+//  writeDisplay();
+//  delay(delaytime);
+//  moveSnakeTo(1, 10);
+//  writeDisplay();
+//  delay(delaytime);
+//  moveSnakeTo(2, 10);
+//  writeDisplay();
+//  delay(delaytime);
+//  Serial.println("Down");
+//  moveSnakeTo(2, 9);
+//  writeDisplay();
+//  delay(delaytime);
+//  moveSnakeTo(2, 8);
+//  writeDisplay();
+//  delay(delaytime);
+//  moveSnakeTo(2, 7);
+//  writeDisplay();
+//  delay(delaytime);
   
-  delay(delaytime);
 }
