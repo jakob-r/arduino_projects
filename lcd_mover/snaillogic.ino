@@ -6,13 +6,9 @@ coord snake[maxSnakeN];
 const coord nacoord = {0, 0};
 byte snakeHeadInd = 0;
 byte snakeLength = 0;
+unsigned long previousMoveMillis = 0;
 
 const byte squareN = 8;
-
-// which leds to turn on and of
-#include <QueueList.h>
-QueueList <coord> ledOn;
-QueueList <coord> ledOff;
 
 // returns the index position of the i-th snake element
 // head is at position 0
@@ -39,11 +35,11 @@ float coordsLoopF(float x) {
   while (round(x) < 0) {
     x = x + squareN;
   }
-  int res = (int)x % squareN;
+  int res = round(x) % squareN;
   if (res == 0) {
     res = squareN;
   }
-  return ((int)x - x) + res;
+  return (round(x) - x) + (float)res;
 }
 
 float distLoop(float a, float b) {
@@ -51,9 +47,9 @@ float distLoop(float a, float b) {
   float bwd = 0;
   if (b>=a) {
     fwd = b - a;
-    bwd = b - squareN - a;
+    bwd = b - (float)squareN - a;
   } else {
-    fwd = squareN - a + b;
+    fwd = (float)squareN - a + b;
     bwd = - (a - b);
   }
   if (abs(fwd) <= abs(bwd)) {
@@ -88,66 +84,72 @@ void snakeStart(byte x, byte y, byte len) {
 }
 
 boolean moveSnakeTo(float x, float y) {
-  x = coordsLoopF(x);
-  y = coordsLoopF(y);
-//  Serial.print("Goal: ");
-//  Serial.print(x);
-//  Serial.print("'");
-//  Serial.print(y);
-//  Serial.print(" Head: ");
-//  Serial.print(snake[snakeHeadInd].x);
-//  Serial.print("'");
-//  Serial.println(snake[snakeHeadInd].y);
-  float stepsizex = distLoop(snake[snakeHeadInd].x, x);
-  byte goalx = coordsLoop(snake[snakeHeadInd].x + max(min(round(stepsizex), 1),-1));
-  float stepsizey = distLoop(snake[snakeHeadInd].y, y);
-  byte goaly = coordsLoop(snake[snakeHeadInd].y + max(min(round(stepsizey), 1),-1));
-//  Serial.print("x steps:");
-//  Serial.println(stepsizex);
-//  Serial.print("y steps:"); 
-//  Serial.println(stepsizey);
-  if (goalx == snake[snakeHeadInd].x && goaly == snake[snakeHeadInd].y) {
-    Serial.println("Stay at HEAD");
-    return true;
-  }
-  if (abs(stepsizex) > abs(stepsizey)) {
-    if (goalx != snake[snakeIndAt(1)].x) {
-      goaly = snake[snakeHeadInd].y;
-    } else {
-      goalx = snake[snakeHeadInd].x;
-    }
-  } else {
-    if (goaly != snake[snakeIndAt(1)].y) {
-      goalx = snake[snakeHeadInd].x;
-    } else {
-      goaly = snake[snakeHeadInd].y;
-    }
-  }
-  coord goal = {goalx, goaly};
-  if (collisionWithSnake(goal)) {
-    Serial.println("Game Over!");
-    gameOver = true;
-    return false;
-  }
-  byte newHeadInd = snakeIndAt(-1);
-  snake[newHeadInd] = goal;
-  ledOn.push(goal);
-  byte snakeTailInd = snakeIndAt(snakeLength-1);
-  ledOff.push(snake[snakeTailInd]);
-  snake[snakeTailInd] = nacoord;
-  snakeHeadInd = newHeadInd;
-  return true;
-}
-
-boolean collisionWithSnake(coord point) {
-  coord snakePoint;
-  for(int i = 0; i < snakeLength; i++) {
-    snakePoint = snake[snakeIndAt(i)];
-    if (snakePoint.x == point.x && snakePoint.y == point.y) {
+  if (millis() - previousMoveMillis > delaytime) {
+    previousMoveMillis = millis();
+    x = coordsLoopF(x);
+    y = coordsLoopF(y);
+  //  Serial.print("Goal: ");
+  //  Serial.print(x);
+  //  Serial.print("'");
+  //  Serial.print(y);
+  //  Serial.print(" Head: ");
+  //  Serial.print(snake[snakeHeadInd].x);
+  //  Serial.print("'");
+  //  Serial.println(snake[snakeHeadInd].y);
+    float stepsizex = distLoop(snake[snakeHeadInd].x, x);
+    float stepsizey = distLoop(snake[snakeHeadInd].y, y);
+    if (abs(stepsizex) < 0.5 && abs(stepsizey) < 0.5) {
+      // Move not important
       return true;
     }
+    coord goalx = {coordsLoop(snake[snakeHeadInd].x + max(min(round(stepsizex), 1),-1)), snake[snakeHeadInd].y};
+    coord goaly = {snake[snakeHeadInd].x, coordsLoop(snake[snakeHeadInd].y + max(min(round(stepsizey), 1),-1))};
+  //  Serial.print("x steps:");
+  //  Serial.println(stepsizex);
+  //  Serial.print("y steps:"); 
+  //  Serial.println(stepsizey);
+    byte collisionx = collisionWithSnake(goalx);
+    byte collisiony = collisionWithSnake(goaly);
+    byte newHeadInd = snakeIndAt(-1);
+  
+    // Where to move the snake?
+    if (collisionx < 2 && collisiony < 2) {
+      // We do collide with the HEAD or the part behind the HEAD so we stay
+      return true;
+    } else if (collisionx < snakeLength && collisiony < snakeLength) {
+      // We collide with another part of the Snake
+      Serial.println("Game Over!");
+      gameOver = true;
+      return false;
+    } else if ((abs(stepsizex) > abs(stepsizey) && collisionx >= snakeLength) || collisiony <= snakeLength) {
+      // We want to move x and x is free, or y was blocked
+      snake[newHeadInd] = goalx;
+    } else {
+      // We can only move y and y should be free
+      snake[newHeadInd] = goaly;
+    }
+    ledOn.push(snake[newHeadInd]);
+    byte snakeTailInd = snakeIndAt(snakeLength-1);
+    ledOff.push(snake[snakeTailInd]);
+    snake[snakeTailInd] = nacoord;
+    snakeHeadInd = newHeadInd;
+    return true;
+  } else {
+    return true;
   }
-  return false;
+  
+}
+
+// returns where we collide with snake
+// 254 means no collision
+// 0 means head...
+byte collisionWithSnake(coord point) {
+  for(int i = 0; i < snakeLength; i++) {
+    if (snake[snakeIndAt(i)].x == point.x && snake[snakeIndAt(i)].y == point.y) {
+      return i;
+    }
+  }
+  return 254;
 }
 
 void writeDisplay() {
