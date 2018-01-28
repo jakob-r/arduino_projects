@@ -203,6 +203,7 @@ void gameOverAni() {
   }
   step++;
   if (step >= 50) {
+    step = 0;
     lc.clearDisplay(0);
     timer.stop(timer_gameOverAni);
     startGame();
