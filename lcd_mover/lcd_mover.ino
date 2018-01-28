@@ -36,6 +36,7 @@ byte counter = 0;
 Timer timer; // craete a timer object
 uint8_t timer_ingame;
 uint8_t timer_blink;
+uint8_t timer_gameOverAni;
 uint16_t score;
 const uint8_t powerDotStartWorth = 20;
 uint8_t powerDotWorth;
@@ -48,12 +49,11 @@ QueueList <coord> ledOn;
 QueueList <coord> ledOff;
 
 void setup() {
-  Serial.begin(9600);
+//  Serial.begin(9600);
   setupDigitDisplay();
   setupDisplay();
   setupMpu();
   startGame();
-  timer_blink = timer.every(1000, blinkGoal);
   timer_7seg = timer.every(1, displayDigit);
 }
 
@@ -176,13 +176,29 @@ void blinkGoal() {
 }
 
 void startGame(){
+//  Serial.println("Start Game");
   gameOver = false;
   snakeStart(random(1,8), random(1,8), 1);
   delay(delaytime);
   newPowerDot();
   timer_ingame = timer.every(1000, moveSnake);
+  timer_blink = timer.every(1000, blinkGoal);
   powerDotWorth = powerDotStartWorth;
   score = 0;
+}
+
+void gameOverAni() {
+  static byte step;
+  if (step < 32) {
+    lc.setLed(0, step/8, step%8, true);
+    lc.setLed(0, 7 - (step/8), 7-(step%8), true);  
+  }
+  step++;
+  if (step >= 50) {
+    lc.clearDisplay(0);
+    timer.stop(timer_gameOverAni);
+    startGame();
+  } 
 }
 
 void moveSnake() {
@@ -205,24 +221,22 @@ void moveSnake() {
     timer.stop(timer_ingame);
     score += powerDotWorth;
     newPowerDot();
-    timer_ingame = timer.every(1000 / pow(2, counter), moveSnake);
+    timer_ingame = timer.every(1000 * pow(0.9, counter), moveSnake);
   }
 }
 
 void loop() {
+    
   readMpu();
   
   timer.update();
 
   if (gameOver){
     timer.stop(timer_ingame);
-    for (int i=0; i < 8; i++) {
-      lc.setColumn(0,i,B11111111);
-      delay(100); 
-    }
-    gameOver = !gameOver;
-    lc.clearDisplay(0);
-    startGame();
+    timer.stop(timer_blink);
+    setDigitNumber(score);
+    timer_gameOverAni = timer.every(100, gameOverAni);
+    gameOver = false;
   }
   writeDisplay();
 }
