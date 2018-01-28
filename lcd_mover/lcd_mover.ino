@@ -1,5 +1,6 @@
 #include "mytypes.h"
-
+//timer library
+#include "Timer.h"
 // 8x8 LED Module
 #include "LedControl.h"
 #include <binary.h>
@@ -17,6 +18,14 @@ int16_t samplesZ = 0;
 // for the game
 const int delaytime = 1000;
 boolean gameOver = false;
+byte counter = 0;
+Timer timer; // craete a timer object
+int8_t timer_ingame;
+int8_t timer_blink;
+uint16_t score;
+const uint8_t powerDotStartWorth = 10;
+uint8_t powerDotWorth;
+
 
 // Display writing queue
 // which leds to turn on and of
@@ -28,9 +37,8 @@ void setup() {
   Serial.begin(9600);
   setupDisplay();
   setupMpu();
-  snakeStart(4,2,5);
-  writeDisplay();
-  delay(delaytime);
+  startGame();
+  timer_blink = timer.every(100, blinkGoal);
 }
 
 void setupDisplay() {
@@ -75,6 +83,12 @@ int16_t setSample(int16_t a, int16_t x) {
 }
 
 void blinkGoal(byte x, byte y) {
+  Serial.print("Score: ");
+  Serial.print(score);
+  Serial.print(" PowerDot: ");
+  Serial.print(" Speed: ");
+  Serial.println(1000 / pow(2, counter));
+  
   static boolean on;
   static coord last;
   coord now = {coordsLoop(x), coordsLoop(y)};
@@ -91,26 +105,53 @@ void blinkGoal(byte x, byte y) {
   on = !on;
 }
 
+void startGame(){
+  gameOver = false;
+  snakeStart(random(1,8), random(1,8), 1);
+  delay(delaytime);
+  newPowerDot();
+  timer_ingame = timer.every(1000, moveSnake);
+  powerDotWorth = powerDotStartWorth;
+}
+
+void moveSnake() {
+  float y = mapf(samplesZ);
+  float x = mapf(samplesY);
+  byte state = moveSnakeTo(x, y);
+  if (state == 0) {
+    // Collision
+    gameOver = true;
+  } else if (state == 1) {
+    // Move
+    if (powerDotWorth>1) {
+      powerDotWorth--;
+    }
+  } else if (state == 2) {
+    // Stay at Position
+  } else if (state == 3) {
+    // Hit powerDot
+    counter++;
+    timer.stop(timer_ingame);
+    score += powerDotWorth;
+    newPowerDot();
+    timer_ingame = timer.every(1000 / pow(2, counter), moveSnake);
+  }
+}
+
 void loop() {
   readMpu();
   
-  float y = samplesZ;
-  float x = samplesY;
-  y = mapf(y);
-  x = mapf(x);
+  timer.update();
 
-  blinkGoal(x, y);
-
-  if (!gameOver){
-    gameOver = !moveSnakeTo(x, y);
-  } else {
+  if (gameOver){
+    timer.stop(timer_ingame);
     for (int i=0; i < 8; i++) {
       lc.setColumn(0,i,B11111111);
       delay(100); 
     }
     gameOver = !gameOver;
     lc.clearDisplay(0);
-    snakeStart(random(1,8),random(1,8),random(3,7));
+    startGame();
   }
   writeDisplay();
 }
