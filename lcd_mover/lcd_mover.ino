@@ -16,7 +16,7 @@ int16_t samplesY = 0;
 int16_t samplesZ = 0;
 
 // 4digit 7segment display
-const byte CA[4] = {12, 11, 10, 9};
+const byte CA[4] = {12, 11, 10, 8};
 const byte clk = 7;
 const byte latch = 6;
 const byte data = 5;
@@ -41,6 +41,10 @@ uint16_t score;
 const uint8_t powerDotStartWorth = 20;
 uint8_t powerDotWorth;
 
+// for the sound
+const byte pin_sound = 9;
+
+
 
 // Display writing queue
 // which leds to turn on and of
@@ -50,6 +54,7 @@ QueueList <coord> ledOff;
 
 void setup() {
 //  Serial.begin(9600);
+  noTone(pin_sound);
   setupDigitDisplay();
   setupDisplay();
   setupMpu();
@@ -146,8 +151,8 @@ void blinkGoal() {
   if (showScore) {
     setDigitNumber(score);
   } else {
-    setDigitNumber(powerDotWorth * 10);
-    digits[0] = digit_off;
+    setDigitNumber(powerDotWorth * 100);
+    digits[2] = digit_off;
     digits[3] = digit_off;
   }
   showScore = !showScore;
@@ -179,17 +184,20 @@ void startGame(){
 //  Serial.println("Start Game");
   gameOver = false;
   snakeStart(random(1,8), random(1,8), 1);
+  tone(pin_sound, 400, 100);
   delay(delaytime);
   newPowerDot();
   timer_ingame = timer.every(1000, moveSnake);
   timer_blink = timer.every(1000, blinkGoal);
   powerDotWorth = powerDotStartWorth;
   score = 0;
+  counter = 0;
 }
 
 void gameOverAni() {
   static byte step;
   if (step < 32) {
+    tone(pin_sound, 10 * step, 10);
     lc.setLed(0, step/8, step%8, true);
     lc.setLed(0, 7 - (step/8), 7-(step%8), true);  
   }
@@ -208,20 +216,23 @@ void moveSnake() {
   if (state == 0) {
     // Collision
     gameOver = true;
+    tone(pin_sound, 400, 200);
   } else if (state == 1) {
     // Move
     if (powerDotWorth>1) {
       powerDotWorth--;
     }
-  } else if (state == 2) {
+    tone(pin_sound, 1200, 25);
+  } else if (state == 2 || state == 3) {
     // Stay at Position
-  } else if (state == 3) {
+  } else if (state == 4) {
     // Hit powerDot
     counter++;
     timer.stop(timer_ingame);
     score += powerDotWorth;
     newPowerDot();
     timer_ingame = timer.every(1000 * pow(0.9, counter), moveSnake);
+    tone(pin_sound, 600, 50);
   }
 }
 

@@ -84,6 +84,13 @@ void snakeStart(byte x, byte y, byte len) {
   }
 }
 
+/* Returns
+ * 0 Collision
+ * 1 normal move
+ * 2 stay because of backwards collision
+ * 3 stay because xy do not change enough
+ * 4 hit power dot
+ */
 byte moveSnakeTo(float x, float y) {
   x = coordsLoopF(x);
   y = coordsLoopF(y);
@@ -99,7 +106,7 @@ byte moveSnakeTo(float x, float y) {
   float stepsizey = distLoop(snake[snakeHeadInd].y, y);
   if (abs(stepsizex) < 0.5 && abs(stepsizey) < 0.5) {
     // Move not important
-    return true;
+    return 3;
   }
   coord goalx = {coordsLoop(snake[snakeHeadInd].x + max(min(round(stepsizex), 1),-1)), snake[snakeHeadInd].y};
   coord goaly = {snake[snakeHeadInd].x, coordsLoop(snake[snakeHeadInd].y + max(min(round(stepsizey), 1),-1))};
@@ -130,7 +137,7 @@ byte moveSnakeTo(float x, float y) {
   if (snake[newHeadInd].x == powerDot.x && snake[newHeadInd].y == powerDot.y) {
     snakeLength++;
     snakeHeadInd = newHeadInd;
-    return 3;
+    return 4;
   } else {
     byte snakeTailInd = snakeIndAt(snakeLength-1);
     ledOff.push(snake[snakeTailInd]);
