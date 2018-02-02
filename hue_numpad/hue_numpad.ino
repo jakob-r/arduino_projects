@@ -1,11 +1,13 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
+#include <WiFiClientSecure.h>
 #include <Keypad.h>
 #include <ArduinoJson.h>
 
 // HUE SETTINGS
 const char* HUE_IP = "192.168.0.4";
-//const char* HUE_USER = "fFNkeCHkeWr-w9eO-s68qLSwgoKaMHZRI85ksI6z"; // --> define in private.ino
+//const char* HUE_USER = "..."; // --> define in private.ino
+extern const char* HUE_USER;
 const int HUE_LIGHT = 3;
 const int NLIGHTS = 9;
 const int MAPLIGHTS[NLIGHTS] = {1, 2, 3, 4, 5, 6, 7, 8, 9}; //position in array = numpad
@@ -15,8 +17,14 @@ const int TRUELIGHTS[7] = {1, 3, 4, 5, 6, 7, 8}; //things that are not lights.
 // WIFI SETTINGS
 //const char* WLAN_SSID = "..."; // --> define in private.ino
 //const char* WLAN_PASS = "..."; // --> define in private.ino
+extern const char* WLAN_SSID;
+extern const char* WLAN_PASS;
 
-WiFiClient client;
+// IFTT SETTINGS
+WiFiClientSecure ifttt_client;
+const char* ifttt_url = "https://maker.ifttt.com/trigger/arduino_motionhome/with/key/";
+extern const char* IFTTT_KEY;
+const char* ifttt_sha1_fingerprint = "C0 5D 08 5E E1 3E E0 66 F3 79 27 1A CA 1F FC 09 24 11 61 62";
 
 // Keypad Settings
 const byte ROWS = 4; //4 Reihen
@@ -38,6 +46,9 @@ Keypad customKeypad = Keypad( makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS
 const byte PIN_IR = D8;
 bool irFired = true;
 
+// Light Sensor  (Photoresistor)
+const byte PIN_PR = A0;
+
 // Global Variables we use to output functions
 int state_light;
 bool state_on;
@@ -57,14 +68,13 @@ void setup() {
 
   pinMode(PIN_IR, INPUT);
 
-  Serial.print("Connecting to ");
-  Serial.println(WLAN_SSID);
-
   connectWifi();
   delay(1000);
 }
 
 void connectWifi() {
+  Serial.print("Connecting to ");
+  Serial.println(WLAN_SSID);
   /* Explicitly set the ESP8266 to be a WiFi-client, otherwise, it by default,
     would try to act as both a client and an access-point and could cause
     network-issues with your other WiFi-devices on your WiFi-network. */
@@ -77,9 +87,10 @@ void connectWifi() {
   }
 
   Serial.println("");
-  Serial.print("WiFi connected with");
+  Serial.print("WiFi connected with ");
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
+  WiFi.setAutoReconnect (true);
 }
 
 void setHue(int lightNum, boolean ison, int bri, int transitiontime) {
@@ -114,9 +125,11 @@ void lightsAllOn() {
 
 bool anyLightOn() {
   for (int i = 0; i < NTRUELIGHTS; i++) {
+    Serial.print(i);
     getHue(TRUELIGHTS[i]);
     if (state_on == true) {
       return true;
+      Serial.println("<-");
     }
   }
   return false;
@@ -142,25 +155,59 @@ void partyMode() {
   }
 }
 
+String connectionStatus ( int which )
+{
+    switch ( which )
+    {
+        case WL_CONNECTED:
+            return "Connected";
+            break;
+
+        case WL_NO_SSID_AVAIL:
+            return "Network not availible";
+            break;
+
+        case WL_CONNECT_FAILED:
+            return "Wrong password";
+            break;
+
+        case WL_IDLE_STATUS:
+            return "Idle status";
+            break;
+
+        case WL_DISCONNECTED:
+            return "Disconnected";
+            break;
+
+        default:
+            return "Unknown";
+            break;
+    }
+}
+
 void loop() {
   // Handle Stuff that always happens
   partyMode();
 
   // Motion Detector
-  bool irSignal = digitalRead(PIN_IR);
-  if (irSignal && !irFired) { 
-    Serial.print("Motion detected... ");
-    irFired = true;
-    bool anyLight = anyLightOn();
-    if (anyLight == false) {
-      Serial.print("and all lights off... ");
-      lightsAllOn();
-    }
-    Serial.println("!");
-  } else if (!irSignal && irFired) {
-    irFired = false;
-  }
-
+  Serial.println(analogRead(PIN_PR));
+  delay(500);
+//  if (analogRead(PIN_PR) < 100) {
+    bool irSignal = digitalRead(PIN_IR);
+    if (irSignal && !irFired) { 
+      Serial.print("Motion detected... ");
+      irFired = true;
+      bool anyLight = anyLightOn();
+      if (anyLight == false) {
+        Serial.print("and all lights off... ");
+        lightsAllOn();
+      }
+      Serial.println("!");
+    } else if (!irSignal && irFired) {
+      irFired = false;
+    }  
+//  }
+  
   // Handle Keypad
   char customKey = customKeypad.getKey();
   if (customKey != NULL) {
@@ -183,4 +230,20 @@ void loop() {
       }  
     }
   }
+
+  // Reconnect
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.print("Problem :");
+    Serial.println(connectionStatus( WiFi.status() ).c_str());
+    WiFi.disconnect();
+    delay(500);
+    WiFi.begin(WLAN_SSID, WLAN_PASS);
+    Serial.print("Reconnect to ");
+    Serial.println(WLAN_SSID);
+    while (WiFi.status() != WL_CONNECTED) {
+      delay(500);
+      Serial.print(".");
+    }  
+  }
+  
 }

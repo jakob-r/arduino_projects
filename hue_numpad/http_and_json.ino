@@ -11,7 +11,7 @@ void doHttp(String action, String &url, String &command, String &result) {
       httpCode = http.PUT(command);  
     }
 
-    if (httpCode > 0) {
+    if (httpCode > 0 || true) {
       // HTTP header has been send and Server response header has been handled
       Serial.printf("[HTTP] %s... code: %d\n", action.c_str(), httpCode);
       // file found at server
@@ -25,6 +25,8 @@ void doHttp(String action, String &url, String &command, String &result) {
       Serial.printf("[HTTP] %s... failed, error: %s\n", action.c_str(), http.errorToString(httpCode).c_str());
     }
     http.end();
+  } else {
+    Serial.println("Not connected to WiFi anymore");
   }
 }
 
