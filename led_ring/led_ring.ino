@@ -58,7 +58,7 @@ void moveParticles() {
   for (uint8_t i=0; i < nparts; i++) {
     if (parts[i].v > 0 && parts[i].x > 254 - parts[i].v) {
       parts[i].x = parts[i].x - (254 - parts[i].v);
-    } else if (parts[i].v < 0 && parts[i].x < parts[i].v) {
+    } else if (parts[i].v < 0 && parts[i].x < (-1) * parts[i].v) {
       parts[i].x = 254 + parts[i].v + parts[i].x;
     } else {
       parts[i].x += parts[i].v;  
