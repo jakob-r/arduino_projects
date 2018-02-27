@@ -66,9 +66,24 @@ void moveParticles() {
   }
 }
 
+
+
+void invertOnCollision() {
+  for (uint8_t i=0; i < nparts; i++) {
+    for (uint8_t j=0; i < nparts; i++) {
+      if (parts[i].x == parts[j].x && (parts[i].v > 0) != (parts[j].v > 0 ))  {
+        parts[i].v = -1 * parts[i].v;
+        parts[j].v = -1 * parts[j].v; 
+      }
+    }
+  }
+}
+
 void loop() {
   //parts[0].color = CHSV(parts[0].x, 255, 255);
   clearLeds();
+//  invertOnCollision();
+  parts[0].l = round((sin8_avr(parts[0].x) + 10) / 2); 
   moveParticles();
   renderParticlesToLeds();
   FastLED.show();

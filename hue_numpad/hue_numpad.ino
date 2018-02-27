@@ -1,6 +1,8 @@
+#include <Event.h>
+#include <Timer.h>
+
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
-#include <WiFiClientSecure.h>
 #include <Keypad.h>
 #include <ArduinoJson.h>
 
@@ -19,12 +21,6 @@ const int TRUELIGHTS[7] = {1, 3, 4, 5, 6, 7, 8}; //things that are not lights.
 //const char* WLAN_PASS = "..."; // --> define in private.ino
 extern const char* WLAN_SSID;
 extern const char* WLAN_PASS;
-
-// IFTT SETTINGS
-WiFiClientSecure ifttt_client;
-const char* ifttt_url = "https://maker.ifttt.com/trigger/arduino_motionhome/with/key/";
-extern const char* IFTTT_KEY;
-const char* ifttt_sha1_fingerprint = "C0 5D 08 5E E1 3E E0 66 F3 79 27 1A CA 1F FC 09 24 11 61 62";
 
 // Keypad Settings
 const byte ROWS = 4; //4 Reihen
@@ -47,7 +43,9 @@ const byte PIN_IR = D8;
 bool irFired = true;
 
 // Light Sensor  (Photoresistor)
+Timer timer;
 const byte PIN_PR = A0;
+byte light_value;
 
 // Global Variables we use to output functions
 int state_light;
@@ -67,7 +65,7 @@ void setup() {
   delay(50);
 
   pinMode(PIN_IR, INPUT);
-
+  timer.every(250, readLightValue);
   connectWifi();
   delay(1000);
 }
@@ -185,14 +183,17 @@ String connectionStatus ( int which )
     }
 }
 
+void readLightValue() {
+  light_value = analogRead(PIN_PR);
+}
+
 void loop() {
   // Handle Stuff that always happens
   partyMode();
-
+  timer.update();
   // Motion Detector
-  Serial.println(analogRead(PIN_PR));
-  delay(500);
-//  if (analogRead(PIN_PR) < 100) {
+
+  if (light_value < 50) {
     bool irSignal = digitalRead(PIN_IR);
     if (irSignal && !irFired) { 
       Serial.print("Motion detected... ");
@@ -206,7 +207,7 @@ void loop() {
     } else if (!irSignal && irFired) {
       irFired = false;
     }  
-//  }
+  }
   
   // Handle Keypad
   char customKey = customKeypad.getKey();
