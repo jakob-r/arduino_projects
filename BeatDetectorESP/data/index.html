@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html charset="UTF-8">
+<head>
+    <meta name="viewport">
+    <title>BeatDetector</title>
+    <style type="text/css">
+        .slidecontainer {
+            width: 100%; /* Width of the outside container */
+        }
+        
+        /* The slider itself */
+        .slider {
+            -webkit-appearance: none;  /* Override default CSS styles */
+            appearance: none;
+            width: 90%; /* Full-width */
+            height: 1em; /* Specified height */
+            background: #d3d3d3; /* Grey background */
+            outline: none; /* Remove outline */
+            opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+            -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+            transition: opacity .2s;
+        }
+        
+        /* Mouse-over effects */
+        .slider:hover {
+            opacity: 1; /* Fully shown on mouse-over */
+        }
+        
+        /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none; /* Override default look */
+            appearance: none;
+            width: 2em; /* Set a specific slider handle width */
+            height: 2em; /* Slider handle height */
+            background: #4CAF50; /* Green background */
+            cursor: pointer; /* Cursor on hover */
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 2em; /* Set a specific slider handle width */
+            height: 2em; /* Slider handle height */
+            background: #4CAF50; /* Green background */
+            cursor: pointer; /* Cursor on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>BeatDetector</h1>
+    <h2>Measured Vales</h2>
+    <table>
+        <tr>
+            <th>Variable</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Value</td>
+            <td id="tab_value"></td>
+        </tr>
+        <tr>
+            <td>Envelope</td>
+            <td id="tab_envelope"></td>
+        </tr>
+        <tr>
+            <td>Beat</td>
+            <td id="tab_beat"></td>
+        </tr>
+        <tr>
+            <td>Threshold</td>
+            <td id="tab_threshold"></td>
+        </tr>
+    </table>
+    <h2>Change Values</h2>
+    <div class="slidecontainer">
+        <input type="range" min="1" max="100" value="50" class="slider" id="input_threshold">
+        <span id="output_threshold"></span>
+    </div>
+    
+    <script type="application/javascript">
+        var xmlhttp = new XMLHttpRequest();
+        var url = "/api.json";
+        
+        var slider_input_threshold = document.getElementById("input_threshold");
+        var slider_output = document.getElementById("output_threshold");
+        slider_output.innerHTML = slider_input_threshold.value;
+        
+        slider_input_threshold.oninput = function() {
+            output.innerHTML = this.value;
+        }
+        
+        function updateStart() {
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4) {
+                    if(this.status == 200) {
+                        try {
+                            var data = JSON.parse(this.responseText);
+                            updateView(data);
+                        } catch (e) {
+                            console.log("Update failed: " + e);
+                            console.log(this.responseText);
+                        }
+                    }
+                    
+                    window.setTimeout(updateStart, 500);
+                }
+            };
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+        }
+        
+        function updateView(data) {
+            document.getElementById("tab_value").innerHTML = data.value;
+            document.getElementById("tab_envelope").innerHTML = data.envelope;
+            document.getElementById("tab_beat").innerHTML = data.beat;
+            document.getElementById("tab_threshold").innerHTML = data.threshold;
+        }
+        
+        updateStart();
+        
+    </script>
+</body>
+</html>

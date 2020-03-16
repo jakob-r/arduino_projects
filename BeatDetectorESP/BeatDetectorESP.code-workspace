@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "BeatDetectorESP",
+			"path": "."
+		},
+		{
+			"name": "test",
+			"path": "/home/jakob/Documents/PlatformIO/Projects/test"
+		}
+	],
+	"settings": {}
+}
