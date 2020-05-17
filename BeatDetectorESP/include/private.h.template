@@ -1,0 +1,2 @@
+const char* const WLAN_SSID = "";
+const char* const WLAN_PASS = "";
