@@ -3,35 +3,55 @@
 class CarControl {
 
   //right wheels
-  const int rw_sw = A0;
-  const int rw_fwd = A1;
-  const int rw_rwd = A2;
+  const int8_t rw_sw = A0;
+  const int8_t rw_fwd = A1;
+  const int8_t rw_rwd = A2;
   //left wheels
-  const int lw_fwd = A3;
-  const int lw_rwd = A4;
-  const int lw_sw = A5;
+  const int8_t lw_fwd = A3;
+  const int8_t lw_rwd = A4;
+  const int8_t lw_sw = A5;
   //avoidance 
-  const int av_bl = 8; //bottom
-  const int av_br = 9;
-  const int av_fl = 10; //front
-  const int av_fr = 11;
+  const int8_t av_bl = 8; //bottom
+  const int8_t av_br = 9;
+  const int8_t av_fl = 10; //front
+  const int8_t av_fr = 11;
 
-  void forward() {
-    digitalWrite(rw_sw, HIGH);
+  uint8_t pwm_speed = 0;
+  uint8_t pwm_count = 0;
+  uint16_t duration_max = 0;
+  uint16_t duration_count = 0;
+
+
+  void forward() { // sets forward "gear"
     digitalWrite(rw_fwd, HIGH);
     digitalWrite(rw_rwd, LOW);
     
-    digitalWrite(lw_sw, HIGH);
     digitalWrite(lw_fwd, HIGH);
     digitalWrite(lw_rwd, LOW);
   }
 
-  void halt() {
+  void backward() { // sets backwards "gear"
+    digitalWrite(rw_fwd, LOW);
+    digitalWrite(rw_rwd, HIGH);
+    
+    digitalWrite(lw_fwd, LOW);
+    digitalWrite(lw_rwd, HIGH);
+  }
+
+  void halt() { // turns motors off 
     digitalWrite(rw_sw, LOW);
     digitalWrite(lw_sw, LOW);
   }
 
+  void move() { // turns motors on
+    digitalWrite(rw_sw, HIGH);
+    digitalWrite(lw_sw, HIGH);
+  }
+
   public:
+    boolean driving = false;
+    boolean stopped = false;
+
     void setup() {
       pinMode(rw_sw, OUTPUT);
       pinMode(rw_fwd, OUTPUT);
@@ -45,9 +65,36 @@ class CarControl {
       pinMode(av_fr, INPUT_PULLUP);
     }
 
-    void drive(short int speed, short unsigned int duration, short int drift) {
-      forward();
-      delay(duration * 100);
-      halt();
+    void interrupt() {
+      if (driving) {
+        if (pwm_count <= pwm_speed) {
+          move();
+        } else {
+          halt();
+        }
+      } else {
+        halt();
+      }
+      pwm_count++;
+      if (pwm_count == 10) {
+        pwm_count = 0;
+        duration_count++;
+        if (duration_count == duration_max) {
+          driving = false;
+          stopped = true;
+        }
+      }
+    }
+
+    void drive(int16_t speed, uint16_t duration, int8_t drift) {
+      if (speed > 0) {
+        forward();
+      } else {
+        backward();
+      }
+      pwm_speed = 7;
+      duration_max = 20;
+      driving = true;
+      stopped = false;
     }
 };

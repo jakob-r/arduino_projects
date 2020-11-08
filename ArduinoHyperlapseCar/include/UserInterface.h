@@ -1,9 +1,9 @@
 // User Interface
 
 class UserInterface {
-  short int current_value;
+  int16_t current_value;
   bool current_row; //because it can just be 0 or 1
-  short unsigned int current_col;
+  uint8_t current_col;
   bool taking_values = false;
 
 //  LiquidCrystal m_lcd;
@@ -17,7 +17,7 @@ class UserInterface {
       lcd.clear();
     }
 
-    void set_value(LiquidCrystal lcd, int value) {
+    void set_value(LiquidCrystal lcd, int16_t value) {
       if (taking_values && value != current_value) {
         lcd.setCursor(current_col, current_row);
         lcd.print(F("    "));

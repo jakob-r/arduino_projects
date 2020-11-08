@@ -7,16 +7,16 @@ class RotaryEncoder {
   bool state_button = true;
 
   // Rotary Encoder
-  short int m_pin_A; // cll pin
-  short int m_pin_B; // dt pin
-  short int m_pin_button; // sw pin
+  uint8_t m_pin_A; // cll pin
+  uint8_t m_pin_B; // dt pin
+  uint8_t m_pin_button; // sw pin
   
   
   public:
-    unsigned short int button_count = 0;
-    short int rotary_position = 0;
+    uint8_t button_count = 0;
+    int16_t rotary_position = 0;
 
-    RotaryEncoder(short int pin_A, short int pin_B, short int pin_button) {
+    RotaryEncoder(uint8_t pin_A, uint8_t pin_B, uint8_t pin_button) {
       m_pin_A = pin_A;
       m_pin_B = pin_B;
       m_pin_button = pin_button;
