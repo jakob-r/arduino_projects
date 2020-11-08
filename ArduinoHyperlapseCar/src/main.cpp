@@ -4,6 +4,7 @@
 #include <Wire.h>
 
 #include "RotaryEncoder.h"
+#include "UserInterface.h"
 
 // PINS
 
@@ -11,6 +12,8 @@
 const int rs = 7, en = 6, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
+// User Interface
+UserInterface ui(lcd);
 
 // Rotary Encoder
 const short int pin_A = 0;   //ky-040 clk pin, interrupt & add 100nF/0.1uF capacitors between pin & ground!!!
