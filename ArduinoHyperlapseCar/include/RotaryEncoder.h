@@ -62,7 +62,7 @@ class RotaryEncoder {
       }
     }
 
-    bool button_pressed() {
+    bool button_pressed() { // 0 is button pushed
       bool pin_button_val = digitalRead(m_pin_button);
       if (state_button != pin_button_val) {
         state_button = pin_button_val;

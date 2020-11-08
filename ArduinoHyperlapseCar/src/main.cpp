@@ -41,54 +41,51 @@ void setup() {
   // set up the LCD's number of columns and rows:
   lcd.begin(16, 2);
   ui.setup(lcd);
+  car.setup();
 }
 
-uint16_t display_button_count = 0;
-int16_t display_rotary_position = 0;
+short unsigned int state = 0;
+bool state_changed = true;
+bool process_ended = false;
 
 void loop() {
-  short unsigned int state = 0;
-  bool state_changed = false;
-  
-  if (rot_enc.button_pressed()) {
-    state++;
-    state_changed = true;
-  } else {
-    state_changed = false;
+
+  if (state_changed) {
+    if (state == 0) {
+      process_ended = false;
+      ui.show_selection_speed(lcd);
+    } else if (state == 1) {
+      user_speed = rot_enc.rotary_position;
+      ui.show_selection_duration(lcd);
+    } else if (state == 2) {
+      user_duration = max(1, rot_enc.rotary_position);
+      ui.show_selection_drift(lcd);
+    } else if (state == 3) {
+      //user_drift = rot_enc.rotary_position;
+      ui.show_start(lcd);
+    } else if (state == 4) {
+      ui.show_running(lcd);
+      car.drive(user_speed, user_duration, user_drift);
+      process_ended = true;
+    }
+    rot_enc.rotary_position = 0;
   }
 
   ui.set_value(lcd, rot_enc.rotary_position);
 
-  if (state_changed) {
-    if (state == 0) {
-      ui.show_selection_speed(lcd);
-    } else if (state == 1) {
-      ui.show_selection_duration(lcd);
-    } else if (state == 2) {
-      ui.show_selection_drift(lcd);
-    } else if (state == 3) {
-      ui.show_running(lcd);
-    }
+  if (process_ended) {
+    state_changed = true;
+    state = 0;
+  } else {
+    state_changed = rot_enc.button_pressed();
+    state = state + state_changed;
   }
-
-  if (state == 0) {
-    user_speed = rot_enc.rotary_position;
-  } else if (state == 1) {
-    user_duration = max(0, rot_enc.rotary_position);
-  } else if (state == 2) {
-    user_drift = rot_enc.rotary_position;
-  } else if (state == 3) {
-    car.drive(user_speed, user_duration, user_drift);
-  }
-
-
-
-
+  
   
   // int button_count = digitalRead(pin_button);
   // if (display_button_count != rot_enc.button_count) {
   lcd.setCursor(10, 1);
-  lcd.print(digitalRead(pin_button));
+  lcd.print(state);
   //   display_button_count = button_count;
   // }
   

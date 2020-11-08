@@ -16,8 +16,38 @@ class CarControl {
   const int av_fl = 10; //front
   const int av_fr = 11;
 
-  public:
-    void drive(short int speed, short unsigned int duration, short int drift) {
+  void forward() {
+    digitalWrite(rw_sw, HIGH);
+    digitalWrite(rw_fwd, HIGH);
+    digitalWrite(rw_rwd, LOW);
+    
+    digitalWrite(lw_sw, HIGH);
+    digitalWrite(lw_fwd, HIGH);
+    digitalWrite(lw_rwd, LOW);
+  }
 
+  void halt() {
+    digitalWrite(rw_sw, LOW);
+    digitalWrite(lw_sw, LOW);
+  }
+
+  public:
+    void setup() {
+      pinMode(rw_sw, OUTPUT);
+      pinMode(rw_fwd, OUTPUT);
+      pinMode(rw_rwd, OUTPUT);
+      pinMode(lw_fwd, OUTPUT);
+      pinMode(lw_rwd, OUTPUT);
+      pinMode(lw_sw, OUTPUT);
+      pinMode(av_bl, INPUT_PULLUP);
+      pinMode(av_br, INPUT_PULLUP);
+      pinMode(av_fl, INPUT_PULLUP);
+      pinMode(av_fr, INPUT_PULLUP);
+    }
+
+    void drive(short int speed, short unsigned int duration, short int drift) {
+      forward();
+      delay(duration * 100);
+      halt();
     }
 };
