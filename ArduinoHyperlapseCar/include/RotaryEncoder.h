@@ -4,7 +4,7 @@ class RotaryEncoder {
   bool state_both_on = false;
   bool state_upwards = false;
   bool state_downwards = false;
-  bool state_button = false;
+  bool state_button = true;
 
   // Rotary Encoder
   short int m_pin_A; // cll pin
@@ -60,6 +60,17 @@ class RotaryEncoder {
           state_downwards = true;
         }
       }
+    }
+
+    bool button_pressed() {
+      bool pin_button_val = digitalRead(m_pin_button);
+      if (state_button != pin_button_val) {
+        state_button = pin_button_val;
+        if (state_button == 0) {
+          return(true);
+        }
+      }
+      return(false);
     }
   
 };
